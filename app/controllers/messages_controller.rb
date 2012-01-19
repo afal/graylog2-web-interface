@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_filter :do_scoping
-
   filter_access_to :all
 
   # XXX ELASTIC clean up triple-duplicated quickfilter shit
@@ -74,6 +73,11 @@ class MessagesController < ApplicationController
 
     if ::Configuration.allow_version_check
       @last_version_check = current_user.last_version_check
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {render :json => @messages.to_json}
     end
   end
 

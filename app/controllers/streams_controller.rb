@@ -25,6 +25,10 @@ class StreamsController < ApplicationController
         @streams_with_no_category << stream
       end
     end
+    respond_to do |format|
+      format.json {render :json => @all_streams.to_json}
+      format.html
+    end
   end
 
   def showrange
@@ -42,6 +46,10 @@ class StreamsController < ApplicationController
 
     @messages = MessageGateway.all_in_range(params[:page], @from.to_i, @to.to_i, :stream_id => @stream.id)
     @total_count = @messages.total_result_count
+    respond_to do |format|
+      format.html
+      format.json {render :json => @messages.to_json}
+    end
   end
 
   def rules
