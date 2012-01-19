@@ -99,7 +99,7 @@ class MessageGateway
           must { string("message:#{filters[:message]}") } unless filters[:message].blank?
 
           # Facility
-          must { term(:facility, filters[:facility]) } unless filters[:facility].blank?
+          must { string("facility:#{filters[:facility]}") } unless filters[:facility].blank?
 
           # Severity
           if !filters[:severity].blank? and filters[:severity_above].blank?
